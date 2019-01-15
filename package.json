@@ -1,0 +1,37 @@
+{
+  "scripts": {
+    "test": "npm-run-all test:*",
+    "test:html": "globstar nu-html-checker *.html",
+    "init-project": "npm install && npm-run-all init:*",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "build": "npm-run-all build:* test",
+    "build:clean": "rimraf css/*",
+    "build:autoprefixer": "autoprefixer-cli styles.css",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watch": "npm-run-all build -p watch:*",
+    "watch:sassprefixer": "onchange sass/*.scss -- npm-run-all build-dev:sass build:autoprefixer",
+    "watch:browsersync": "browser-sync start --server --files css/*.css *.html js/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blagoff/jsx.git"
+  },
+  "keywords": [
+    "nauka",
+    "npm",
+    "node"
+  ],
+  "author": "przemek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blagoff/node/jsx"
+  },
+  "homepage": "https://github.com/blagoff/node#readme",
+  "dependencies": {
+    "babel-standalone": "^6.26.0",
+    "node-sass": "^4.11.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3"
+  },
+  "devDependencies": {}
+}
